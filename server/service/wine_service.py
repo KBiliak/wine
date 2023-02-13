@@ -1,21 +1,20 @@
-from server import mysql
-from server.db import wine_repository
+from server import wineRepository
 
 
 def create_wine(wine):
     print("create wine: wine =", wine)
-    all_wines = wine_repository.get_wine(mysql)
+    all_wines = wineRepository.get_wine()
     sort = wine['sort']
 
     for ex_wine in all_wines:
         if ex_wine['sort'] == sort:
             return {'error': 'wine with this sort already exists'}
 
-    wine_repository.post_wine(mysql, wine)
+    wineRepository.post_wine(wine)
     return None
 
 
 def show_wine():
-    wine = wine_repository.get_wine(mysql)
+    wine = wineRepository.get_wine()
     print('all wines', wine)
     return wine
